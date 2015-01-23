@@ -1,0 +1,23 @@
+apply from: 'http://dev.jocean.org:8080/devconf/build-lib.gradle'
+
+configurations {
+    all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    all*.exclude group: 'log4j', module: 'log4j'
+    all*.exclude group: 'commons-logging', module: 'commons-logging'
+    all { resolutionStrategy.cacheChangingModulesFor 1, 'minutes' }
+}
+
+dependencies {
+    /* log */
+    compile "org.slf4j:slf4j-api:1.7.7"
+    
+    /* begin for logback HornetQ Appender */
+    compile "ch.qos.logback:logback-classic:1.0.6"
+    compile "org.hornetq:hornetq-core-client:2.2.13.Final"
+    compile "org.hornetq:hornetq-jms-client:2.2.13.Final"
+    compile "org.jboss.spec.javax.jms:jboss-jms-api_1.1_spec:1.0.1.Final"
+            
+    /* test */
+    testCompile "junit:junit:4.8.2"
+    testCompile "com.alibaba:fastjson:1.1.24"
+}
